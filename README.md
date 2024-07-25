@@ -25,7 +25,7 @@ This project is a web application that provides quick analysis of web server log
 
 ### **Prerequisites**
 
-- .NET SDK 6.0 or later
+- .NET SDK 8.0
 - Visual Studio 2022 or Visual Studio Code
 
 ### **Installation**
