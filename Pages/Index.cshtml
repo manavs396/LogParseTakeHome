@@ -1,0 +1,94 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container">
+    <h1>Log File Analysis</h1>
+
+    <form method="get" onsubmit="fixDateTimes()">
+        <div class="form-group">
+            <label for="startDateTime">Start DateTime:</label>
+            <input type="datetime-local" id="startDateTime" name="startDateTime" class="form-control"
+                value="@Model.StartDateTime?.ToString("yyyy-MM-ddTHH:mm")" />
+        </div>
+        <div class="form-group">
+            <label for="endDateTime">End DateTime:</label>
+            <input type="datetime-local" id="endDateTime" name="endDateTime" class="form-control"
+                value="@Model.EndDateTime?.ToString("yyyy-MM-ddTHH:mm")" />
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
+    <h2>Number of accesses to webserver per host</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Host</th>
+                <th>Access Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in Model.HostAccessCounts)
+            {
+                <tr>
+                    <td>@entry.Key</td>
+                    <td>@entry.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Number of successful resource accesses by URI</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>URI</th>
+                <th>Access Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in Model.SuccessfulAccessCounts)
+            {
+                <tr>
+                    <td>@entry.Key</td>
+                    <td>@entry.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function fixDateTimes() {
+            const startInput = document.getElementById('startDateTime');
+            const endInput = document.getElementById('endDateTime');
+
+            if (startInput.value) {
+                const startDate = new Date(startInput.value);
+                startInput.value = `2024-08-${startDate.getDate().toString().padStart(2, '0')}T${startDate.getHours().toString().padStart(2, '0')}:${startDate.getMinutes().toString().padStart(2, '0')}`;
+            }
+
+            if (endInput.value) {
+                const endDate = new Date(endInput.value);
+                endInput.value = `2024-08-${endDate.getDate().toString().padStart(2, '0')}T${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
+            }
+        }
+
+        // Set initial values for the date inputs
+        window.onload = function () {
+            const startInput = document.getElementById('startDateTime');
+            const endInput = document.getElementById('endDateTime');
+
+            if (!startInput.value) {
+                startInput.value = "2024-08-01T00:00";
+            }
+
+            if (!endInput.value) {
+                endInput.value = "2024-08-31T23:59";
+            }
+        };
+    </script>
+}
