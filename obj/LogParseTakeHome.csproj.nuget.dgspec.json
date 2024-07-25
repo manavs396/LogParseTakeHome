@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kings\\LogParseTakeHome\\LogParseTakeHome.csproj": {}
+    "C:\\Users\\kings\\takehomefinal\\LogParseTakeHome\\LogParseTakeHome.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kings\\LogParseTakeHome\\LogParseTakeHome.csproj": {
+    "C:\\Users\\kings\\takehomefinal\\LogParseTakeHome\\LogParseTakeHome.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kings\\LogParseTakeHome\\LogParseTakeHome.csproj",
+        "projectUniqueName": "C:\\Users\\kings\\takehomefinal\\LogParseTakeHome\\LogParseTakeHome.csproj",
         "projectName": "LogParseTakeHome",
-        "projectPath": "C:\\Users\\kings\\LogParseTakeHome\\LogParseTakeHome.csproj",
+        "projectPath": "C:\\Users\\kings\\takehomefinal\\LogParseTakeHome\\LogParseTakeHome.csproj",
         "packagesPath": "C:\\Users\\kings\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kings\\LogParseTakeHome\\obj\\",
+        "outputPath": "C:\\Users\\kings\\takehomefinal\\LogParseTakeHome\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kings\\AppData\\Roaming\\NuGet\\NuGet.Config"

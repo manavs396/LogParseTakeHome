@@ -38,5 +38,25 @@ public class IndexModel : PageModel
 
         HostAccessCounts = LogParser.CountAccessesPerHost(logEntries);
         SuccessfulAccessCounts = LogParser.CountSuccessfulAccessesByUri(logEntries);
+        WriteResultsToFile();
+    }
+    private void WriteResultsToFile()
+    {
+        var filePath = "log_analysis_results.txt";
+        using (var writer = new StreamWriter(filePath))
+        {
+            writer.WriteLine("Number of accesses to webserver per host:");
+            foreach (var entry in HostAccessCounts)
+            {
+                writer.WriteLine($"{entry.Key} {entry.Value}");
+            }
+
+            writer.WriteLine();
+            writer.WriteLine("Number of successful resource accesses by URI:");
+            foreach (var entry in SuccessfulAccessCounts)
+            {
+                writer.WriteLine($"{entry.Key} {entry.Value}");
+            }
+        }
     }
 }

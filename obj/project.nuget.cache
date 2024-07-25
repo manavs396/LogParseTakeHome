@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I8bIaX3jY1U=",
+  "dgSpecHash": "DdgPY8to1Ts=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kings\\LogParseTakeHome\\LogParseTakeHome.csproj",
+  "projectFilePath": "C:\\Users\\kings\\takehomefinal\\LogParseTakeHome\\LogParseTakeHome.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kings\\.nuget\\packages\\coverlet.collector\\3.0.3\\coverlet.collector.3.0.3.nupkg.sha512",
     "C:\\Users\\kings\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
