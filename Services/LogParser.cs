@@ -84,53 +84,28 @@ namespace LogParseTakeHome.Services
             var currentPart = string.Empty;
             var inQuotes = false;
 
-            if (logEntry.Count(c => c == '"') == 2)
+            int firstQuoteIndex = logEntry.IndexOf('"');
+            int lastQuoteIndex = logEntry.LastIndexOf('"');
+
+            if (firstQuoteIndex == -1 || lastQuoteIndex == -1 || firstQuoteIndex == lastQuoteIndex)
             {
-                for (int i = 0; i < logEntry.Length; i++)
-                {
-                    var currentChar = logEntry[i];
-
-                    if (currentChar == '"')
-                    {
-                        inQuotes = !inQuotes;
-                    }
-                    else if (currentChar == ' ' && !inQuotes)
-                    {
-                        if (!string.IsNullOrWhiteSpace(currentPart))
-                        {
-                            parts.Add(currentPart.Trim());
-                            currentPart = string.Empty;
-                        }
-                    }
-                    else
-                    {
-                        currentPart += currentChar;
-                    }
-                }
-
-                if (!string.IsNullOrWhiteSpace(currentPart))
-                {
-                    parts.Add(currentPart.Trim());
-                }
-                return parts.ToArray();
+                // Handle cases with no quotes or unmatched quotes
+                return logEntry.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             }
-            else
-            {
-                int firstQuoteIndex = logEntry.IndexOf('"');
-                int lastQuoteIndex = logEntry.LastIndexOf('"');
 
-                string betweenQuotes = logEntry.Substring(firstQuoteIndex + 1, lastQuoteIndex - firstQuoteIndex - 1);
+            string betweenQuotes = logEntry.Substring(firstQuoteIndex + 1, lastQuoteIndex - firstQuoteIndex - 1);
 
+            // Remove any extra quotes at the end of the betweenQuotes string
+            betweenQuotes = betweenQuotes.Replace("\"", "");
 
-                string beforeQuotes = logEntry[..firstQuoteIndex].Trim();
-                string afterQuotes = logEntry[(lastQuoteIndex + 1)..].Trim();
+            string beforeQuotes = logEntry[..firstQuoteIndex].Trim();
+            string afterQuotes = logEntry[(lastQuoteIndex + 1)..].Trim();
 
-                string[] beforeSplit = beforeQuotes.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                string[] afterSplit = afterQuotes.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] beforeSplit = beforeQuotes.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] afterSplit = afterQuotes.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                string[] result = beforeSplit.Concat(new[] { betweenQuotes }).Concat(afterSplit).ToArray();
-                return result;
-            }
+            string[] result = beforeSplit.Concat(new[] { betweenQuotes }).Concat(afterSplit).ToArray();
+            return result;
         }
 
         private static DateTime ParseDateTime(string dateTime)

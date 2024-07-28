@@ -40,6 +40,7 @@ public class IndexModel : PageModel
         SuccessfulAccessCounts = LogParser.CountSuccessfulAccessesByUri(logEntries);
         WriteResultsToFile();
     }
+
     private void WriteResultsToFile()
     {
         var filePath = "log_analysis_results.txt";
